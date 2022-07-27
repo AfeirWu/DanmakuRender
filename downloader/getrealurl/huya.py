@@ -6,6 +6,7 @@ import base64
 import urllib.parse
 import hashlib
 import time
+import logging
 
 
 def live(e):
@@ -30,6 +31,7 @@ def live(e):
 
 def get_real_url(room_id):
     try:
+        logger = logging.getLogger('haya')
         room_url = 'https://www.huya.com/' + str(room_id)
         header = {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,6 +41,7 @@ def get_real_url(room_id):
         response = requests.get(url=room_url, headers=header).text
         liveLineUrl = re.findall(r'"liveLineUrl":"([\s\S]*?)",', response)[0]
         liveline = base64.b64decode(liveLineUrl).decode('utf-8')
+        logger.error('liveline:'+liveline)
         if liveline:
             if 'replay' in liveline:
                 return '直播录像：' + liveline
