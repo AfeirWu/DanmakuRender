@@ -25,7 +25,6 @@ def get_stream_url(live_url,type='flv'):
         url = huya.get_real_url(rid)
         if url.startswith('http'):
             stream_url = url
-            logger.error('开播')
         elif ('未开播' in url) or ('直播录像' in url):
             logger.error('未开播')
             raise RuntimeError('未开播')
@@ -49,6 +48,5 @@ def get_stream_url(live_url,type='flv'):
     
     if not stream_url:
         raise ValueError('无法解析URL')
-    logger.error('正常')
     return stream_url
         

@@ -168,7 +168,7 @@ class Downloader():
         stream_info = self._get_stream_info(stream_url)
 
         if not (stream_info.get('width') or stream_info.get('height')):
-            self.logger.warn(f'无法获取视频大小，使用默认值{args.resolution}.')
+            self.logger.error(f'无法获取视频大小，使用默认值{args.resolution}.')
             stream_info['width'],stream_info['height'] = [int(i) for i in args.resolution.split('x')]
 
         self.width,self.height = stream_info['width'],stream_info['height']
@@ -238,7 +238,7 @@ class Downloader():
                         speed = float(line[l:r][6:])
                         if speed < 0.9:
                             ffmpeg_low_speed += 1
-                            self.logger.warn(f'直播流下载速度过慢, 请保证网络带宽充足.')
+                            self.logger.error(f'直播流下载速度过慢, 请保证网络带宽充足.')
                             if ffmpeg_low_speed >= 2:
                                 self.logger.error('下载速度过慢, 即将重试.')
                                 self.stop()
@@ -250,7 +250,7 @@ class Downloader():
                     if 'Opening' in log:
                         m3u8_drop_cnt = 0
                     else:
-                        self.logger.warn(f'直播流读取错误, 请检查录制情况.')
+                        self.logger.error(f'直播流读取错误, 请检查录制情况.')
                         m3u8_drop_cnt += 1
                         if m3u8_drop_cnt >= 2:
                             self.logger.error('直播流读取错误, 即将重试.')
