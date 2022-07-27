@@ -70,7 +70,7 @@ def replay_one(args,onprint=False):
             logger.info(f'{args.name}录制终止.')
             exit(0)
 
-        if onair(args.url):
+        if not onair(args.url):
             logger.error(f'{args.name}录制异常终止, 请查询日志文件了解更多信息.')
             logger.info('正在重试...')
             time.sleep(5)
