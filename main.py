@@ -118,7 +118,7 @@ if __name__ == '__main__':
     parser.add_argument('-v','--version',action='store_true')
     parser.add_argument('-u','--url',type=str,default='')
     parser.add_argument('-s','--split',type=int,default=3600)
-    parser.add_argument('--ffmpeg',type=str,default='tools/ffmpeg.exe')
+    parser.add_argument('--ffmpeg',type=str,default='ffmpeg')
     parser.add_argument('--timeout',type=int,default=20)
     parser.add_argument('--video_dir',type=str,default='./直播回放')
     parser.add_argument('--dm_dir',type=str)

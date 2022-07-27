@@ -30,7 +30,7 @@ def live(e):
 
 def get_real_url(room_id):
     try:
-        room_url = 'https://m.huya.com/' + str(room_id)
+        room_url = 'https://www.huya.com/' + str(room_id)
         header = {
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) '

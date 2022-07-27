@@ -23,7 +23,7 @@ class Downloader():
             'User-Agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 '
                             '(KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36 '
         }
-    def __init__(self, url:str, name:str, ffmpeg:str = 'tools/ffmpeg.exe', video_dir:str='./save', dm_dir:str=None, render_dir='/save-dm'):
+    def __init__(self, url:str, name:str, ffmpeg:str = 'ffmpeg', video_dir:str='./save', dm_dir:str=None, render_dir='/save-dm'):
         self.taskname = name
         self.url = url
         self.ffmpeg = ffmpeg
@@ -90,10 +90,10 @@ class Downloader():
         
         self.format_videoname = f'{self.taskname}-{time.strftime("%Y%m%d-%H%M%S",time.localtime())}-Part%03d.mp4'
         if args.split > 0:
-            ffmpeg_args += ['-f','segment','-segment_time',str(args.split),'-reset_timestamps','1','-movflags','faststart+frag_keyframe+empty_moov',join(self.video_dir,self.format_videoname)]
+            ffmpeg_args += ['-f','null','/dev/null']
         else:
             fname = self.format_videoname.replace(f'%03d','000')
-            ffmpeg_args += ['-movflags','faststart+frag_keyframe+empty_moov',join(self.video_dir,fname)]
+            ffmpeg_args += ['-f','null','/dev/null']
 
         
         self.logger.debug('Downloader FFmpeg args:')

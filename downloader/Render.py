@@ -13,7 +13,7 @@ from os.path import join
 
 
 class Render():
-    def __init__(self,args,ffmpeg:str='tools/ffmpeg.exe'):
+    def __init__(self,args,ffmpeg:str='ffmpeg'):
         self.ffmpeg = ffmpeg
         self.args = args
         self.logger = logging.getLogger('render')
