@@ -49,6 +49,6 @@ def get_stream_url(live_url,type='flv'):
     
     if not stream_url:
         raise ValueError('无法解析URL')
-    
+    logger.error('正常')
     return stream_url
         
