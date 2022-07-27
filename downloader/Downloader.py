@@ -96,8 +96,8 @@ class Downloader():
             ffmpeg_args += ['-f','null','/dev/null']
 
         
-        self.logger.debug('Downloader FFmpeg args:')
-        self.logger.debug(ffmpeg_args)
+        self.logger.error('Downloader FFmpeg args:')
+        self.logger.error(ffmpeg_args)
 
         if args.debug:
             proc = subprocess.Popen(ffmpeg_args, stdin=subprocess.PIPE, stdout=sys.stdout, stderr=subprocess.STDOUT,bufsize=10**8)
@@ -188,8 +188,8 @@ class Downloader():
         self._ffmpeg_proc = self._set_ffmpeg(stream_url,args)
         self._dm_proc = self._set_danmaku(args)
 
-        self.logger.debug('DanmakuRender args:')
-        self.logger.debug(self.args)
+        self.logger.error('DanmakuRender args:')
+        self.logger.error(self.args)
 
         log = ''
         ffmpeg_low_speed = 0
@@ -221,15 +221,15 @@ class Downloader():
                 if len(segs) > 2 and '.mp4' in segs[1] and '%' not in segs[1]:
                     if onprint:
                         print('')
-                    self.logger.info(f"正在录制分片{segs[1]}.")
+                    self.logger.error(f"正在录制分片{segs[1]}.")
                     
                 if self._ffmpeg_proc.poll() is not None:
-                    self.logger.debug('FFmpeg exit.')
+                    self.logger.error('FFmpeg exit.')
                     self.stop()
-                    self.logger.debug(log)
+                    self.logger.error(log)
 
             if self.duration > timer_cnt*30 and not self.args.debug:
-                self.logger.debug(f'FFmpeg output:{log}')
+                self.logger.error(f'FFmpeg output:{log}')
 
                 if not args.disable_lowspeed_interrupt:
                     l = line.find('speed=')
@@ -262,7 +262,7 @@ class Downloader():
                         self.stop()
 
                 if timer_cnt%2 == 0 and not onair(self.url):
-                    self.logger.debug('Live end.')
+                    self.logger.error('Live end.')
                     self.stop()
 
                 log = ''
@@ -285,19 +285,19 @@ class Downloader():
         try:
             self.dmw.stop()
         except Exception as e:
-            self.logger.debug(e)
+            self.logger.error(e)
         try:
             self._ffmpeg_proc.stdin.flush()
         except Exception as e:
-            self.logger.debug(e)
+            self.logger.error(e)
         try:
             self._ffmpeg_proc.send_signal(signal.SIGINT)
             out, _ = self._ffmpeg_proc.communicate(timeout=2.0)
             out = out.decode('utf-8')
-            self.logger.debug(out)
+            self.logger.error(out)
         except Exception as e:
             self._ffmpeg_proc.kill()
-            self.logger.debug(e)
+            self.logger.error(e)
         time.sleep(0.5)
 
 
