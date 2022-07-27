@@ -74,11 +74,6 @@ def replay_one(args,onprint=False):
             logger.error(f'{args.name}录制异常终止, 请查询日志文件了解更多信息.')
             logger.info('正在重试...')
             time.sleep(5)
-        else:
-            logger.info(f'{args.name}直播结束,正在等待...')
-            time.sleep(60)
-            while not onair(args.url):
-                time.sleep(60)
 
 def set_auto_render(args,autoexit=False):
     os.makedirs(args.render_dir,exist_ok=True)
