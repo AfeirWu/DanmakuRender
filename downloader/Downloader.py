@@ -276,7 +276,7 @@ class Downloader():
             return rval
         except KeyboardInterrupt:
             self.stop()
-            self.logger.info(f'{self.taskname}录制结束.')
+            self.logger.error(f'{self.taskname}录制结束.')
             exit(0)
 
     def stop(self):
