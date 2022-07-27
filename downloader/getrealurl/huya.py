@@ -41,7 +41,7 @@ def get_real_url(room_id):
         response = requests.get(url=room_url, headers=header).text
         liveLineUrl = re.findall(r'"liveLineUrl":"([\s\S]*?)",', response)[0]
         liveline = base64.b64decode(liveLineUrl).decode('utf-8')
-        logger.error('liveline:'+liveline)
+        logger.error('liveline: '+liveline)
         if liveline:
             if 'replay' in liveline:
                 return '直播录像：' + liveline
@@ -52,6 +52,7 @@ def get_real_url(room_id):
             real_url = '未开播或直播间不存在'
     except:
         real_url = '直播间不存在'
+    logger.error('real_url: '+real_url)
     return real_url
 
 if __name__ == '__main__':
