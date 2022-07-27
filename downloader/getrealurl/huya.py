@@ -30,8 +30,8 @@ def live(e):
 
 
 def get_real_url(room_id):
+    logger = logging.getLogger('haya')
     try:
-        logger = logging.getLogger('haya')
         room_url = 'https://www.huya.com/' + str(room_id)
         header = {
             'Content-Type': 'application/x-www-form-urlencoded',
